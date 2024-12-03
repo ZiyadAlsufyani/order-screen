@@ -7,8 +7,17 @@ body {
 
 /* Order Screen Styles */
 .order-container {
-  padding: 20px;
+  padding: 40px;  /* Increased padding */
   text-align: center;
+  max-width: 1400px;  /* Wider container */
+  margin: 0 auto;  /* Center the container */
+}
+
+.sections-wrapper {
+  display: flex;
+  justify-content: space-between;
+  gap: 60px;  /* Increased gap between sections */
+  margin-top: 30px;
 }
 
 .order-container h1 {
@@ -23,12 +32,12 @@ body {
 
 .order-list {
   list-style: none;
-  padding: 0;
+  padding: 20px;  /* Add padding to lists */
 }
 
 .order-list li {
-  margin: 10px 0;
-  padding: 10px;
+  margin: 15px 0;  /* Increase spacing between list items */
+  padding: 15px;  /* More padding for list items */
   background: #f4f4f4;
   border-radius: 8px;
   color: #333;
@@ -43,11 +52,13 @@ body {
 
 /* Separate sections for Preparing and Ready */
 .section {
-  margin: 20px 0;
+  flex: 1;
+  margin: 0;
   border: 1px solid #ddd;
-  padding: 10px;
+  padding: 30px;  /* Increased padding */
   border-radius: 10px;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  min-width: 400px;  /* Increased minimum width */
 }
 
 .section h2 {
