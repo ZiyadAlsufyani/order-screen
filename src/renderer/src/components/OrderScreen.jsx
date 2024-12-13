@@ -3,7 +3,16 @@ import '../assets/OrderScreen.css' // Import the new styles
 import StickyHeader from './StickyHeader'
 
 const OrderScreen = () => {
-  const [orders, setOrders] = useState({ preparing: [], ready: [] })
+  // Initialize state from localStorage or default to empty arrays
+  const [orders, setOrders] = useState(() => {
+    const savedOrders = localStorage.getItem('orders')
+    return savedOrders ? JSON.parse(savedOrders) : { preparing: [], ready: [] }
+  })
+
+  // Save to localStorage whenever orders change
+  useEffect(() => {
+    localStorage.setItem('orders', JSON.stringify(orders))
+  }, [orders])
 
   useEffect(() => {
     const fetchData = async () => {
@@ -13,30 +22,39 @@ const OrderScreen = () => {
         
         // Process home orders (add to preparing)
         if (data.dataFromHome) {
-          setOrders(prevState => ({
-            ...prevState,
-            preparing: [...new Set([...prevState.preparing, ...data.dataFromHome.map(order => order.orderNum)])]
-          }))
+          setOrders(prevState => {
+            const newState = {
+              ...prevState,
+              preparing: [...new Set([...prevState.preparing, ...data.dataFromHome.map(order => order.orderNum)])]
+            }
+            return newState
+          })
         }
 
         // Process kitchen orders (move from preparing to ready)
         if (data.dataFromKitchen) {
           data.dataFromKitchen.forEach(order => {
-            setOrders(prevState => ({
-              preparing: prevState.preparing.filter(id => id !== order.orderNum),
-              ready: [...new Set([...prevState.ready, order.orderNum])]
-            }))
+            setOrders(prevState => {
+              const newState = {
+                preparing: prevState.preparing.filter(id => id !== order.orderNum),
+                ready: [...new Set([...prevState.ready, order.orderNum])]
+              }
+              return newState
+            })
           })
         }
 
         // Process termination orders (remove from ready)
         if (data.dataFromTermination) {
-          setOrders(prevState => ({
-            ...prevState,
-            ready: prevState.ready.filter(id => 
-              !data.dataFromTermination.some(order => order.orderNum === id)
-            )
-          }))
+          setOrders(prevState => {
+            const newState = {
+              ...prevState,
+              ready: prevState.ready.filter(id => 
+                !data.dataFromTermination.some(order => order.orderNum === id)
+              )
+            }
+            return newState
+          })
         }
       } catch (error) {
         console.error('Error fetching orders:', error)
