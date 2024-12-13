@@ -53,8 +53,6 @@ This code contains trade secrets of Real-Time Innovations, Inc.
       <domain name="MyDomain" domain_id="0">
         <register_type name="ShapeType" type_ref="ShapeType"/>
         <topic name="Square" register_type_ref="ShapeType"/>
-        <topic name="Circle" register_type_ref="ShapeType"/>
-        <topic name="Triangle" register_type_ref="ShapeType"/>
       </domain>
     </domain_library>
 
@@ -72,16 +70,87 @@ This code contains trade secrets of Real-Time Innovations, Inc.
         <subscriber name="MySubscriber">
           <data_reader name="MySquareReader" topic_ref="Square">
             <content_filter name="MyFilter" kind="builtin.sql">
-              <expression>toDevice MATCH %0</expression>
+              <expression>(toDevice MATCH %0)</expression>
               <expression_parameters>
                 <element>&apos;$(toDevice)&apos;</element>
               </expression_parameters>
             </content_filter>
-            <datareader_qos>
-              <reliability>
-                <kind>RELIABLE_RELIABILITY_QOS</kind>
-              </reliability>
-            </datareader_qos>
+          </data_reader>
+        </subscriber>
+      </domain_participant>
+    </domain_participant_library>
+    <domain_participant_library name="HomeScreenDomainParticipantLibrary">
+      <domain_participant name="MyPubParticipant" domain_ref="MyDomainLibrary::MyDomain">
+        <publisher name="MyPublisher">
+          <data_writer name="MySquareWriter" topic_ref="Square"/>
+        </publisher>
+      </domain_participant>
+      <domain_participant name="MySubParticipant" domain_ref="MyDomainLibrary::MyDomain">
+        <subscriber name="MySubscriber">
+          <data_reader name="MySquareReader" topic_ref="Square">
+            <content_filter name="MyFilter" kind="builtin.sql">
+              <expression>(toDevice MATCH %0)</expression>
+              <expression_parameters>
+                <element>&apos;$(toDevice)&apos;</element>
+              </expression_parameters>
+            </content_filter>
+          </data_reader>
+        </subscriber>
+      </domain_participant>
+    </domain_participant_library>
+    <domain_participant_library name="KitchenScreenDomainParticipantLibrary">
+      <domain_participant name="MyPubParticipant" domain_ref="MyDomainLibrary::MyDomain">
+        <publisher name="MyPublisher">
+          <data_writer name="MySquareWriter" topic_ref="Square"/>
+        </publisher>
+      </domain_participant>
+      <domain_participant name="MySubParticipant" domain_ref="MyDomainLibrary::MyDomain">
+        <subscriber name="MySubscriber">
+          <data_reader name="MySquareReader" topic_ref="Square">
+            <content_filter name="MyFilter" kind="builtin.sql">
+              <expression>(toDevice MATCH %0)</expression>
+              <expression_parameters>
+                <element>&apos;$(toDevice)&apos;</element>
+              </expression_parameters>
+            </content_filter>
+          </data_reader>
+        </subscriber>
+      </domain_participant>
+    </domain_participant_library>
+    <domain_participant_library name="OrderCompletionScreenDomainParticipantLibrary">
+      <domain_participant name="MyPubParticipant" domain_ref="MyDomainLibrary::MyDomain">
+        <publisher name="MyPublisher">
+          <data_writer name="MySquareWriter" topic_ref="Square"/>
+        </publisher>
+      </domain_participant>
+      <domain_participant name="MySubParticipant" domain_ref="MyDomainLibrary::MyDomain">
+        <subscriber name="MySubscriber">
+          <data_reader name="MySquareReader" topic_ref="Square">
+            <content_filter name="MyFilter" kind="builtin.sql">
+              <expression>(toDevice MATCH %0)</expression>
+              <expression_parameters>
+                <element>&apos;$(toDevice)&apos;</element>
+              </expression_parameters>
+            </content_filter>
+          </data_reader>
+        </subscriber>
+      </domain_participant>
+    </domain_participant_library>
+    <domain_participant_library name="OrderScreenDomainParticipantLibrary">
+      <domain_participant name="MyPubParticipant" domain_ref="MyDomainLibrary::MyDomain">
+        <publisher name="MyPublisher">
+          <data_writer name="MySquareWriter" topic_ref="Square"/>
+        </publisher>
+      </domain_participant>
+      <domain_participant name="MySubParticipant" domain_ref="MyDomainLibrary::MyDomain">
+        <subscriber name="MySubscriber">
+          <data_reader name="MySquareReader" topic_ref="Square">
+            <content_filter name="MyFilter" kind="builtin.sql">
+              <expression>(toDevice MATCH %0)</expression>
+              <expression_parameters>
+                <element>&apos;$(toDevice)&apos;</element>
+              </expression_parameters>
+            </content_filter>
           </data_reader>
         </subscriber>
       </domain_participant>

@@ -8,14 +8,14 @@ const dataFromHome = []; // Moved outside the function to ensure it is accessibl
 const dataFromKitchen = [];
 const dataFromTermination = [];
 const run = async () => {
-  const connector = new rti.Connector('MyParticipantLibrary::MySubParticipant', configFile);
+  const connector = new rti.Connector('OrderScreenDomainParticipantLibrary::MySubParticipant', configFile);
   const input = connector.getInput('MySubscriber::MySquareReader');
   try {
     console.log('Waiting for publications...');
     await input.waitForPublications();
 
     console.log('Waiting for data...');
-    for (let i = 0; i < 500; i++) {
+    while (true) {
       await input.wait();
       input.take();
       console.log('Samples received: ' + input.samples.getLength());
