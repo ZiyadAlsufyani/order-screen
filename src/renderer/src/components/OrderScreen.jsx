@@ -5,8 +5,12 @@ import StickyHeader from './StickyHeader'
 const OrderScreen = () => {
   // Initialize state from localStorage or default to empty arrays
   const [orders, setOrders] = useState(() => {
-    const savedOrders = localStorage.getItem('orders')
-    return savedOrders ? JSON.parse(savedOrders) : { preparing: [], ready: [] }
+    try {
+      const savedOrders = localStorage.getItem('orders')
+      return savedOrders ? JSON.parse(savedOrders) : { preparing: [], ready: [] }
+    } catch {
+      return { preparing: [], ready: [] }
+    }
   })
 
   // Save to localStorage whenever orders change
@@ -62,7 +66,7 @@ const OrderScreen = () => {
     }
 
     // Set up interval for fetching
-    const intervalId = setInterval(fetchData, 2000)
+    const intervalId = setInterval(fetchData, 1000)
 
     // Cleanup interval on unmount
     return () => clearInterval(intervalId)
