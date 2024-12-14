@@ -4,12 +4,13 @@ const rti = require('rticonnextdds-connector');
 const app = express();
 const configFile = path.join(__dirname, 'QSystem.xml');
 
-const dataFromHome = []; // Moved outside the function to ensure it is accessible
+const dataFromHome = [];
 const dataFromKitchen = [];
 const dataFromTermination = [];
+
 const run = async () => {
-  const connector = new rti.Connector('OrderScreenDomainParticipantLibrary::MySubParticipant', configFile);
-  const input = connector.getInput('MySubscriber::MySquareReader');
+  const connector = new rti.Connector('OrderScreenDomainParticipantLibrary::OrderScreenSubParticipant', configFile);
+  const input = connector.getInput('OrderScreenSubscriber::OrderScreenReader');
   try {
     console.log('Waiting for publications...');
     await input.waitForPublications();
