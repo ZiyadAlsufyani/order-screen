@@ -1,34 +1,34 @@
-# order-screen
+# Order Screen
 
-An Electron application with React
+Point of sale interface for creating and submitting new orders.
 
-## Recommended IDE Setup
+## Features
+- Order entry interface
+- Real-time communication with kitchen and home screens
+- Integration with RTI Connext DDS messaging system
 
-- [VSCode](https://code.visualstudio.com/) + [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint) + [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
-
-## Project Setup
-
-### Install
-
+## Setup
+1. Install dependencies:
 ```bash
-$ npm install
+npm install
+```
+2. Start the development environment:
+```bash
+# Start both server and application
+npm run start:all
+
+# Or start individually:
+npm run start:server  # Starts DDS server
+npm run start:app     # Starts Electron app
 ```
 
-### Development
-
+## Building
 ```bash
-$ npm run dev
-```
+# Build for current platform
+npm run build
 
-### Build
-
-```bash
-# For windows
-$ npm run build:win
-
-# For macOS
-$ npm run build:mac
-
-# For Linux
-$ npm run build:linux
+# Platform specific builds
+npm run build:win    # Windows
+npm run build:mac    # macOS
+npm run build:linux  # Linux
 ```
